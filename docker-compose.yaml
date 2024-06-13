@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  pismo_service:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - pismo-net
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/basics?allowPublicKeyRetrieval=true
+    depends_on:
+      - mysqldb
+
+    volumes:
+      - .m2:/root/.m2
+
+  mysqldb:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_USER=pismo
+      - MYSQL_PASSWORD=q1w2e3
+      - MYSQL_DATABASE=pismo
+    ports:
+      - 3336:3306
+    healthcheck:
+      test: "/usr/bin/mysql --user=pismo --password=q1w2e3 --execute \"SHOW DATABASES;\""
+      interval: 2s
+      timeout: 20s
+      retries: 10
+networks:
+  pismo-net:
