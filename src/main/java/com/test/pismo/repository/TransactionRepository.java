@@ -11,7 +11,5 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction, Long> {
 
-    @Query("SELECT t FROM Transaction t WHERE t.account.id = :accountId")
-    List<Transaction> findByAccountId(Long accountId, Pageable pageable);
 
 }
