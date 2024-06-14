@@ -45,21 +45,16 @@ ou
 Executar o servidor
 
 ```
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 ### Testes
 ___
 
 ```
-mvn clean test
-```
-
-ou
-
-```
 ./mvnw clean test
 ```
+
 
 ### DB
 ___
