@@ -26,12 +26,13 @@ public class TransactionMapper {
     }
 
     public Transaction toModel(CreateTransactionRequest createTransactionRequest, OperationType operationType, Account account) {
-        var transaction = modelMapper.map(createTransactionRequest, Transaction.class);
-        transaction.setEventDate(LocalDateTime.now());
-        transaction.setOperationType(operationType);
-        transaction.setAccount(account);
-        transaction.setAmount(operationType.convertAmount(createTransactionRequest.getAmount()));
-        return transaction;
+
+       return Transaction.builder()
+                .eventDate(LocalDateTime.now())
+                .operationType(operationType)
+                .account(account)
+                .amount(operationType.convertAmount(createTransactionRequest.getAmount()))
+                .build();
     }
 
 }
