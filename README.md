@@ -106,3 +106,6 @@ curl --location 'http://localhost:8080/transactions' \
 ```
 curl --location 'http://localhost:8080/transactions/2'
 ```
+
+#### Executar via Postman
+Importar a collection `pismo.postman_collection.json`
