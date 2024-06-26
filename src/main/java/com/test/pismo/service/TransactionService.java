@@ -48,11 +48,11 @@ public class TransactionService {
 
         var account = accountRepository.findById(createTransactionRequest.getAccountId()).orElseThrow(() -> new NotFoundException("Invalid account"));
 
-        var transactions = transactionRepository.findTransactionsByAccountId(account.getId());
-
         BigDecimal balance = createTransactionRequest.getAmount().setScale(2, RoundingMode.FLOOR);
 
         if (Objects.equals(createTransactionRequest.getOperationTypeId(), OperationTypeEnum.PAGAMENTO.getOperation().getId())) {
+            var transactions = transactionRepository.findTransactionsByAccountId(account.getId());
+
             balance = updateBalance(transactions, balance);
         }
 
