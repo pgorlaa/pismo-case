@@ -31,7 +31,7 @@ public class OperationType {
 
     public BigDecimal convertAmount(final BigDecimal amount) {
         var sign = debt ? BigDecimal.valueOf(-1D) : BigDecimal.valueOf(1D);
-        return amount.multiply(sign).setScale(2, RoundingMode.UNNECESSARY);
+        return amount.setScale(2, RoundingMode.FLOOR).multiply(sign).setScale(2);
     }
 
 }

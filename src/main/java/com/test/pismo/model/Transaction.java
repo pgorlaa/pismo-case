@@ -32,6 +32,9 @@ public class Transaction {
     @Column(name = "amount", updatable = false, nullable = false)
     private BigDecimal amount;
 
+    @Column(name = "balance", updatable = false, nullable = false)
+    private BigDecimal balance;
+
     @Column(name = "event_date")
     private LocalDateTime eventDate;
 

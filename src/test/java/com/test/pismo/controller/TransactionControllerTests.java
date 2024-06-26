@@ -73,7 +73,7 @@ class TransactionControllerTests {
         assertNotNull(response.getBody());
         assertEquals(createdAccount.getId(), response.getBody().getAccountId());
         assertEquals(OperationTypeEnum.A_VISTA.getOperation().getDescription(), response.getBody().getOperationType());
-        assertEquals(new BigDecimal(-123).setScale(2, RoundingMode.UNNECESSARY), response.getBody().getAmount());
+        assertEquals(new BigDecimal(-123).setScale(2, RoundingMode.FLOOR), response.getBody().getAmount());
 
     }
 
@@ -123,7 +123,7 @@ class TransactionControllerTests {
 
         var operationType = operationTypeRepository.findById(OperationTypeEnum.A_VISTA.getOperation().getId()).get();
 
-        var transaction = Transaction.builder().account(account).operationType(operationType).amount(new BigDecimal(123)).build();
+        var transaction = Transaction.builder().account(account).operationType(operationType).amount(new BigDecimal(123)).balance(new BigDecimal(123)).build();
         var createdTransaction = transactionRepository.save(transaction);
 
         var response = restTemplate.getForEntity(new URL("http://localhost:" + port + "/transactions/" + createdTransaction.getId()).toString(), TransactionResponse.class);
